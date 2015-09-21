@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+   <head><Title>Double</Title></head>
+    <style>
+        #messages{
+            width:100%;
+        }
+    </style>
+    <body>
+        <div class="messages"></div>
+                   <input id="m" autocomplete="off" /> <a id="send" onclick="send()">Send</a>
+        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script>
+        var socket = new WebSocket("ws://localhost:9000/socket");
+
+        socket.onopen = function(evt){
+            console.log('Connected');
+        };
+        socket.onmessage = function(evt)
+        {
+                $(".messages").append("<div class='message'>").text(evt.data);
+            console.log(evt.data);
+        };
+
+        function send(){
+
+         socket.send($("#m").val());
+
+        }
+
+    </script>
+    </body>
+</html>
