@@ -13,16 +13,16 @@ object Login extends Controller {
       (JsPath \ "password").write[String]
     )(unlift(Credentials.unapply))
 
-  def index = Action(BodyParsers.parse.json){ request =>
-    val login = request.body.validate[Credentials]
-    login.fold(
-    error =>{
-      BadRequest(Json.obj("status" ->"KO", "message" -> "Nad req"))
-    },credentials =>{
-        Ok(Json.obj("status"->"ok","message"->"loged in"))
-      }
-    )
-  }
+//  def index = Action(BodyParsers.parse.json){ request =>
+//    val login = request.body.validate[Credentials]
+//    login.fold(
+//    error =>{
+//      BadRequest(Json.obj("status" ->"KO", "message" -> "Nad req"))
+//    },credentials =>{
+//        Ok(Json.obj("status"->"ok","message"->"loged in"))
+//      }
+//    )
+//  }
 
 
 }

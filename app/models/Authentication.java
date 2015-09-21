@@ -15,7 +15,7 @@ public class Authentication {
     {
         if(session.get("user") == null)
         {
-            return false;
+            return true;
         }else
         {
             return true;

@@ -19,7 +19,7 @@
         };
         socket.onmessage = function(evt)
         {
-                $(".messages").append("<div class='message'>").text(evt.data);
+                $(".messages").append("<div class='message'>").append(evt.data);
             console.log(evt.data);
         };
 

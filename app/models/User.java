@@ -1,6 +1,5 @@
 package models;
 
-import com.ning.http.client.websocket.WebSocket;
 
 import static play.mvc.WebSocket.*;
 
@@ -28,5 +27,20 @@ public class User {
     {
         return 1;
     }
+
+    public boolean isCouple(User user)
+    {
+        return(user.getCouple() == this.getCouple());
+    }
+
+    public void sentMessage(Message s)
+    {
+        this.out.write(s.get());
+
+        /**
+         * Log message
+         */
+    }
+
 }
 
