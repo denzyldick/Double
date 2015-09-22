@@ -1,34 +1,56 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-   <head><Title>Double</Title></head>
-    <style>
-        #messages{
-            width:100%;
-        }
-    </style>
-    <body>
-        <div class="messages"></div>
-                   <input id="m" autocomplete="off" /> <a id="send" onclick="send()">Send</a>
-        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-        <script>
-        var socket = new WebSocket("ws://localhost:9000/socket");
+    <head>
+        <meta charset="utf-8" />
+        <title>Double</title>
 
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="assets/stylesheets/main.css" type="text/css" />
+
+    </head>
+    <body>
+        <script src="assets/javascripts/jquery-1.9.0.min.js" type="application/javascript"></script>
+
+
+        <div id="browser-window">
+            <div id="v">
+                <div id="viewport-inner">
+
+                </div>
+            </div>
+
+            <div class="row row-chat">
+                <div class="input-group">
+                    <input type="text" id="m" class="form-control" placeholder="Type your message" />
+
+                    <span class="input-group-btn">
+                        <button type="submit" onclick="return send()" class="btn btn-primary">Send</button>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <script type="application/javascript">
+
+        console.log("hl");
+            var socket = new WebSocket("ws://localhost:9000/socket");
         socket.onopen = function(evt){
             console.log('Connected');
         };
         socket.onmessage = function(evt)
         {
-                $(".messages").append("<div class='message'>").append(evt.data);
+                $("#viewport-inner").append('<div class="bubble-container"><div class="avatar avatar-left"><img src="" /></div><div class="bubble bubble-left">'+evt.data+ '</div>');
             console.log(evt.data);
         };
-
         function send(){
-
          socket.send($("#m").val());
-
+         console.log("message sent");
+         return false;
         }
 
     </script>
+
     </body>
 </html>

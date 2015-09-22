@@ -42,9 +42,6 @@ public class Socket extends Controller {
 
             }
 
-
-
-
         };
 
     }
