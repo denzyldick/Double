@@ -22,11 +22,13 @@ public class Authentication {
         }
 
     }
-    public void addAuthentication(String id)
+    public void addAuthentication(int id)
     {
-     session.put("user",id);
+     session.put("user",String.valueOf(id));
+
     }
     public void remove(){
+
         session.remove("user");
     }
 }
