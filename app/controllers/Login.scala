@@ -21,8 +21,13 @@ object Login extends Controller {
     error =>{
       BadRequest(Json.obj("status" ->"false", "message" -> "Bad request"))
     },valid = credentials => {
-        new User().login(credentials.email, credentials.password)
-        Ok(Json.obj("status" -> "true"))
+        val user: Boolean = new User().login(credentials.email, credentials.password)
+        if(user) {
+          Ok(Json.obj("status" -> "true"))
+        }else{
+          BadRequest(Json.obj("status"->"false","message"->"Wrong credentials"))
+        }
+
       }
     )
   }

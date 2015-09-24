@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * Web sockets
- * @todo Implement socket.io for easier bi-directional communication instead of using plain websocket
  * @author denzyl
  */
 public class Socket extends Controller {
