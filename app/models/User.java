@@ -15,6 +15,8 @@ public class User {
 
     private int couple;
     private Authentication aut;
+	private History history;
+	
     public User()
     {
 
@@ -58,8 +60,10 @@ public class User {
         this.out.write(s.get());
 
         /**
-         * Log message
+         *Log message
          */
+         this.history.add(s);
+         
     }
 
 }
