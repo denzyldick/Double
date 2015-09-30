@@ -6,28 +6,27 @@ import play.api.libs.json._
 import play.api.libs.functional.syntax._
 
 
-
 object Login extends Controller {
-  case class Credentials(email:String,password:String)
 
-  implicit val credentialReads: Reads[Credentials]=
+  case class Credentials(email: String, password: String)
+
+  implicit val credentialReads: Reads[Credentials] =
     (
-      (JsPath \ "email").read[String] and(JsPath \ "password").read[String]
+      (JsPath \ "email").read[String] and (JsPath \ "password").read[String]
       )(Credentials.apply _)
 
-  def index = Action(BodyParsers.parse.json){ request =>
+  def index = Action(BodyParsers.parse.json) { request =>
     val login = request.body.validate[Credentials]
     login.fold(
-    error =>{
-      BadRequest(Json.obj("status" ->"false", "message" -> "Bad request"))
-    },valid = credentials => {
+      error => {
+        BadRequest(Json.obj("status" -> "false", "message" -> "Bad request"))
+      }, valid = credentials => {
         val user: Boolean = new User().login(credentials.email, credentials.password)
-        if(user) {
+        if (user) {
           Ok(Json.obj("status" -> "true"))
-        }else{
-          BadRequest(Json.obj("status"->"false","message"->"Wrong credentials"))
+        } else {
+          BadRequest(Json.obj("status" -> "false", "message" -> "Wrong credentials"))
         }
-
       }
     )
   }
