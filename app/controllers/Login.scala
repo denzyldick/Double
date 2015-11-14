@@ -13,7 +13,7 @@ object Login extends Controller {
   implicit val credentialReads: Reads[Credentials] =
     (
       (JsPath \ "email").read[String] and (JsPath \ "password").read[String]
-      )(Credentials.apply _)
+    )(Credentials.apply _)
 
   def index = Action(BodyParsers.parse.json) { request =>
     val login = request.body.validate[Credentials]
@@ -23,13 +23,11 @@ object Login extends Controller {
       }, valid = credentials => {
         val user: Boolean = new User().login(credentials.email, credentials.password)
         if (user) {
-          Ok(Json.obj("status" -> "true"))
+          Ok(Json.obj("access_token"->"guieaogeaouagoaegheaogubgeg4ou$TT4tu-tu9"))
         } else {
           BadRequest(Json.obj("status" -> "false", "message" -> "Wrong credentials"))
         }
       }
     )
   }
-
-
 }

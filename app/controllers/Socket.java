@@ -14,7 +14,7 @@ import java.util.List;
  * @author denzyl
  */
 public class Socket extends Controller {
-    static List<User> connectedUsers = new ArrayList<>();
+    static List<models.User> connectedUsers = new ArrayList<>();
     static Authentication aut = new Authentication();
 
     public static WebSocket<String> index() {
@@ -22,26 +22,19 @@ public class Socket extends Controller {
 
             public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
                 if(aut.isAuthentic()) {
-                    User connected = new User(in,out);
+                    User connected = new User();
+                    connected.socket(in,out);
                     connectedUsers.add(connected);
                     out.write("Hello there !");
                     in.onMessage(s -> {
-                        connectedUsers.stream().filter((user) -> connected.isCouple(user)).forEach(i -> {
-
+                        connectedUsers.stream().filter(connected::isCouple).forEach(i -> {
                                 i.sentMessage(new Message(s));
-
                         });
-
                     });
-
-
                 }else{
                    out.close();
                 }
-
             }
-
         };
-
     }
 }

@@ -8,7 +8,7 @@ class History(user: User) {
       def get(start:Int,limit:Int): List[Any] =
       {
         /**
-         * Get chat history
+         * Get chat history from mongodb chat logs
          */
         List(0,0)
       }
