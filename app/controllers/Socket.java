@@ -22,14 +22,19 @@ public class Socket extends Controller {
 
             public void onReady(WebSocket.In<String> in, WebSocket.Out<String> out) {
                 if(aut.isAuthentic()) {
+                    System.out.println("new user");
                     User connected = new User();
                     connected.socket(in,out);
                     connectedUsers.add(connected);
                     out.write("Hello there !");
                     in.onMessage(s -> {
+                        System.out.println(s);
                         connectedUsers.stream().filter(connected::isCouple).forEach(i -> {
                                 i.sentMessage(new Message(s));
+
                         });
+                        Message message = new Message(s);
+                        message.store(connected);
                     });
                 }else{
                    out.close();

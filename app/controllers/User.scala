@@ -1,17 +1,15 @@
 package controllers
-
 import play.api.mvc._
 import play.api.libs.json._
-import play.api.libs.functional.syntax._
 
 /**
   * Created by denzyl on 10/28/15.
   */
+case class UserId(userId: Int)
 object User extends Controller {
 
-  case class UserId(userId: Int)
-
-  //  implicit val userRead: Reads[UserId] =    ((JsPath \ "userId").read[Int] ))(UserId.apply _)
+//    implicit val userRead: Reads[Int] =    (JsPath \ "userId").read[Int]
+//  )UserId _
   /**
     * Get user information
     * @return

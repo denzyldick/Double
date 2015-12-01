@@ -23,7 +23,7 @@ object Login extends Controller {
       }, valid = credentials => {
         val user: Boolean = new User().login(credentials.email, credentials.password)
         if (user) {
-          Ok(Json.obj("access_token"->"guieaogeaouagoaegheaogubgeg4ou$TT4tu-tu9"))
+          Ok(Json.obj("access_token"->"FOQWPEJFBNGURG)$$M@LROSLSLQL:QPERO#$K!-tu9"))
         } else {
           BadRequest(Json.obj("status" -> "false", "message" -> "Wrong credentials"))
         }

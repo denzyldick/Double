@@ -10,8 +10,8 @@ import play.mvc.WebSocket.{In, Out}
 import play.api.Play.current
 
 /**
- * Created by denzyl on 11/4/15.
- */
+  * Created by denzyl on 11/4/15.
+  */
 abstract class UserSocket() {
   val connection: Connection = DB.getConnection()
 
@@ -40,25 +40,23 @@ class User extends UserSocket {
     statement.executeQuery().first()
   }
 
-  def authorized(token:String):Boolean = {
-   val statement = connection.prepareStatement("SELECT * FROM user WHERE token = ?")
-    statement.setString(1,token)
+  def authorized(token: String): Boolean = {
+    val statement = connection.prepareStatement("SELECT * FROM user WHERE token = ?")
+    statement.setString(1, token)
     statement.executeQuery.first()
   }
 
-  def create(email:String,password:String,name:String,sex:String) : Boolean =
-  {
+  def create(email: String, password: String, name: String, sex: String): Boolean = {
     val statement = connection.prepareStatement("INSERT INTO user(email,password,name,sex,token)VALUES(?,?,?,?,?)")
-    statement.setString(1,email)
-    statement.setString(2,password)
-    statement.setString(3,name)
-    statement.setString(4,sex)
+    statement.setString(1, email)
+    statement.setString(2, password)
+    statement.setString(3, name)
+    statement.setString(4, sex)
     statement.execute()
   }
 
-  def generateToken():String =
-  {
-    new BigInteger(130,new SecureRandom()).toString
+  def generateToken(): String = {
+    new BigInteger(130, new SecureRandom()).toString
   }
 
   def isCouple(user: User): Boolean = {
